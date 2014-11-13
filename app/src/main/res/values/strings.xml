@@ -4,5 +4,7 @@
     <string name="app_name">CMSC434InClass</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_clock">ClockActivity</string>
+    <string name="title_activity_cool_clock">CoolClockActivity</string>
 
 </resources>

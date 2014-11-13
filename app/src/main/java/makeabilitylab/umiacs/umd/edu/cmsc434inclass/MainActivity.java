@@ -1,12 +1,13 @@
 package makeabilitylab.umiacs.umd.edu.cmsc434inclass;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -18,8 +19,8 @@ public class MainActivity extends Activity {
     // This is just a dummy counter that counts upwards. We'll display
     // the current count value in a TextView. Note: I like to prefix my member variables
     // by the underscore character--this is just a convention, others use 'm'. For example,
-    // 'mCounter = 0' Either way, I think prefixing your member variables makes your code more readable
-    // and cuts down on accidental scoping errors
+    // 'mCounter = 0' Either way, I think prefixing your member variables makes your code more
+    // readable and cuts down on accidental scoping errors
     private int _counter = 0;
 
     // Timers schedule one-shot or recurring tasks for execution.
@@ -68,6 +69,8 @@ public class MainActivity extends Activity {
 
         if(textView.getText().equals("Hello world!")){
             textView.setText("Goodbye world!");
+            System.out.println("Switching to Goodbye World");
+            Log.d("Hey","Switching to Goodbye World");
         }else{
             textView.setText("Hello world!");
         }
@@ -107,4 +110,10 @@ public class MainActivity extends Activity {
             }
         }, 0, 1000);
     }
+
+    public void onButtonGoToClock(View view) {
+        Intent intent = new Intent(this, CoolClockActivity.class);
+        startActivity(intent);
+    }
+
 }
