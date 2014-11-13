@@ -49,10 +49,13 @@ public class CoolClockView extends View {
     }
 
     public void updateTime(Calendar calendar) {
-        _angleHour = Math.toRadians(-90+calendar.get(Calendar.HOUR)*30);
-        _angleMinute = Math.toRadians(-90+calendar.get(Calendar.MINUTE)*6);
-        _angleSecond = Math.toRadians(-90+calendar.get(Calendar.SECOND)*6 +
-                calendar.get(Calendar.MILLISECOND)*30.0/1000.0);
+        //_angleHour = Math.toRadians(-90+calendar.get(Calendar.HOUR)*30);
+        //_angleMinute = Math.toRadians(-90+calendar.get(Calendar.MINUTE)*6);
+        //_angleSecond = Math.toRadians(-90+calendar.get(Calendar.SECOND)*6 +
+        //        calendar.get(Calendar.MILLISECOND)*30.0/1000.0);
+        _angleHour = Math.toRadians(90+(double)(calendar.getTimeInMillis()%43200000)/43200000*360);
+        _angleMinute = Math.toRadians(-90+(double)(calendar.getTimeInMillis()%3600000)/3600000*360);
+        _angleSecond = Math.toRadians(-90+(double)(calendar.getTimeInMillis()%60000)/60000*360);
         _distHour = getWidth()/2-getLeftPaddingOffset();
         _distMinute = getWidth()/3;
         _distSecond = getWidth()/4;

@@ -41,7 +41,7 @@ public class CoolClockActivity extends Activity {
                     }
                 });
             }
-        }, 0, 1000);
+        }, 0, 33);
     }
 
 
