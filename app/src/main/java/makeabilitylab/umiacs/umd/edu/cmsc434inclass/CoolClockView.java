@@ -21,12 +21,16 @@ public class CoolClockView extends View {
     private double _angleHour = 0;
     private double _angleMinute = 0;
     private double _angleSecond = 0;
+    private double _angleMillisecond = 0;
     private float _distHour;
     private float _distMinute;
     private float _distSecond;
     private float _radiusHour = 20;
     private float _radiusMinute = 15;
     private float _radiusSecond = 10;
+    private float _radiusMillisecond = 5;
+    private int _orbitAlpha = 0;
+    private int _timeZoneOffset = Calendar.getInstance().getTimeZone().getRawOffset();
 
     public CoolClockView(Context context) {
         super(context);
@@ -53,12 +57,15 @@ public class CoolClockView extends View {
         //_angleMinute = Math.toRadians(-90+calendar.get(Calendar.MINUTE)*6);
         //_angleSecond = Math.toRadians(-90+calendar.get(Calendar.SECOND)*6 +
         //        calendar.get(Calendar.MILLISECOND)*30.0/1000.0);
-        _angleHour = Math.toRadians(90+(double)(calendar.getTimeInMillis()%43200000)/43200000*360);
-        _angleMinute = Math.toRadians(-90+(double)(calendar.getTimeInMillis()%3600000)/3600000*360);
-        _angleSecond = Math.toRadians(-90+(double)(calendar.getTimeInMillis()%60000)/60000*360);
-        _distHour = getWidth()/2-getLeftPaddingOffset();
+        long ms = calendar.getTimeInMillis()+_timeZoneOffset;
+        _angleHour = Math.toRadians(-90+(double)(ms%43200000)/43200000.0*360.0);
+        _angleMinute = Math.toRadians(-90+(double)(ms%3600000)/3600000.0*360.0);
+        _angleSecond = Math.toRadians(-90+(double)(ms%60000)/60000.0*360.0);
+        _angleMillisecond = Math.toRadians(-90+(double)(ms%1000)/1000.0*360.0);
+        _orbitAlpha = (int)(Math.cos((double)(ms)/1000.0)*64)+127;
+        _distHour = getWidth()/2-2*getLeftPaddingOffset();
         _distMinute = getWidth()/3;
-        _distSecond = getWidth()/4;
+        _distSecond = getWidth()/5;
         invalidate();
     }
 
@@ -81,25 +88,60 @@ public class CoolClockView extends View {
         //Draw hour
         _paint.setColor(Color.RED);
         _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
         canvas.drawCircle(cx, cy, _distHour, _paint);
         _paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(cx+_distHour*(float)Math.cos(_angleHour),
-                cy+_distHour*(float)Math.sin(_angleHour), _radiusHour, _paint);
+        _paint.setAlpha(255);
+        float hx = cx+_distHour*(float)Math.cos(_angleHour);
+        float hy = cy+_distHour*(float)Math.sin(_angleHour);
+        canvas.drawCircle(hx, hy, _radiusHour, _paint);
+        _paint.setColor(Color.BLUE);
+        _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
+        canvas.drawCircle(hx, hy, _radiusHour*5, _paint);
+        _paint.setStyle(Paint.Style.FILL);
+        _paint.setAlpha(255);
+        canvas.drawCircle(hx+_radiusHour*5*(float)Math.cos(_angleMinute),
+                hy+_radiusHour*5*(float)Math.sin(_angleMinute), _radiusMinute/2, _paint);
+
 
         //Draw minute
         _paint.setColor(Color.BLUE);
         _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
         canvas.drawCircle(cx, cy, _distMinute, _paint);
         _paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(cx+_distMinute*(float)Math.cos(_angleMinute),
-                cy+_distMinute*(float)Math.sin(_angleMinute), _radiusMinute, _paint);
+        _paint.setAlpha(255);
+        float mx = cx+_distMinute*(float)Math.cos(_angleMinute);
+        float my = cy+_distMinute*(float)Math.sin(_angleMinute);
+        canvas.drawCircle(mx, my, _radiusMinute, _paint);
+        _paint.setColor(Color.GREEN);
+        _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
+        canvas.drawCircle(mx, my, _radiusMinute*5, _paint);
+        _paint.setStyle(Paint.Style.FILL);
+        _paint.setAlpha(255);
+        canvas.drawCircle(mx+_radiusMinute*5*(float)Math.cos(_angleSecond),
+                my+_radiusMinute*5*(float)Math.sin(_angleSecond), _radiusSecond/2, _paint);
 
         //Draw second
         _paint.setColor(Color.GREEN);
         _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
         canvas.drawCircle(cx, cy, _distSecond, _paint);
         _paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(cx+_distSecond*(float)Math.cos(_angleSecond),
-                cy+_distSecond*(float)Math.sin(_angleSecond), _radiusSecond, _paint);
+        _paint.setAlpha(255);
+        float sx = cx+_distSecond*(float)Math.cos(_angleSecond);
+        float sy = cy+_distSecond*(float)Math.sin(_angleSecond);
+        canvas.drawCircle(sx, sy, _radiusSecond, _paint);
+        _paint.setColor(Color.YELLOW);
+        _paint.setStyle(Paint.Style.STROKE);
+        _paint.setAlpha(_orbitAlpha);
+        canvas.drawCircle(sx, sy, _radiusSecond*5, _paint);
+        _paint.setStyle(Paint.Style.FILL);
+        _paint.setAlpha(255);
+        canvas.drawCircle(sx+_radiusSecond*5*(float)Math.cos(_angleMillisecond),
+                sy+_radiusSecond*5*(float)Math.sin(_angleMillisecond), _radiusMillisecond, _paint);
+
     }
 }

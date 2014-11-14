@@ -11,5 +11,6 @@
     <makeabilitylab.umiacs.umd.edu.cmsc434inclass.CoolClockView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/coolClockView"/>
+        android:id="@+id/coolClockView"
+        android:background="@android:color/background_dark"/>
 </RelativeLayout>
