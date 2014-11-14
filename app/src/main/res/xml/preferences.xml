@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="hour color"
+        android:title="Hour Color"/>
+    <ListPreference
+        android:key="minute color"
+        android:title="Minute Color"/>
+    <ListPreference
+        android:key="second color"
+        android:title="Second Color"/>
+</PreferenceScreen>

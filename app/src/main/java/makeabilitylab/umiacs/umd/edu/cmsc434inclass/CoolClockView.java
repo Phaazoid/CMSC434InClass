@@ -31,6 +31,10 @@ public class CoolClockView extends View {
     private float _radiusMillisecond = 5;
     private int _orbitAlpha = 0;
     private int _timeZoneOffset = Calendar.getInstance().getTimeZone().getRawOffset();
+    private int _colorHour = Color.RED;
+    private int _colorMinute = Color.BLUE;
+    private int _colorSecond = Color.GREEN;
+    private int _colorMillisecond = Color.YELLOW;
 
     public CoolClockView(Context context) {
         super(context);

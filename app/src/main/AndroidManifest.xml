@@ -24,6 +24,7 @@
             android:name=".CoolClockActivity"
             android:label="@string/title_activity_cool_clock" >
         </activity>
+
     </application>
 
 </manifest>
