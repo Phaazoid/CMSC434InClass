@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
     }
 
     public void onButtonGoToClock(View view) {
-        Intent intent = new Intent(this, CoolClockActivity.class);
+        Intent intent = new Intent(this, ClockActivity.class);
         startActivity(intent);
     }
 
