@@ -12,7 +12,7 @@ import android.view.View;
 import java.util.Calendar;
 
 /**
- * Created by apple on 11/12/14.
+ * Created by Simeon on 11/12/14.
  */
 public class CoolClockView extends View {
 
